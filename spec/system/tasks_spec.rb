@@ -6,9 +6,10 @@ RSpec.describe "タスク管理機能", type: :system do
     context 'タスクを登録した場合' do
       it '登録したタスクが表示される' do
         # ここで新規作成ページに入れたいデータを入れる
-        visit tasks_path(task)
+        visit new_task_path
         fill_in 'task[title]', with: "書類作成"
         fill_in 'task[content]', with: "企画書を作成。"
+        click_button("create task")
         expect(page).to have_content '企画書を作成'
       end
     end
@@ -17,7 +18,7 @@ RSpec.describe "タスク管理機能", type: :system do
   describe '一覧表示機能'do
     context '一覧画面に遷移した場合'do
       it '登録したタスクが表示される'do
-        Task.create!(title: '書類作成', content: '企画書を作成する。')
+        FactoryBot.create(:task)  
         visit tasks_path(@task)
         expect(page).to have_content '書類作成'
       end
@@ -27,10 +28,10 @@ RSpec.describe "タスク管理機能", type: :system do
   describe '詳細表示機能'do
     context '任意のタスク詳細画面に遷移した場合'do
       it '登録したタスクが表示される'do
+      @task = FactoryBot.create(:task) 
          visit task_path(@task)
          expect(page).to have_content '書類作成'
       end
     end
   end
-
 end
