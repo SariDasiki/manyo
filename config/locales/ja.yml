@@ -1,0 +1,32 @@
+ja:
+  activerecord:
+    models:
+      task: タスク
+    attributes:
+      task:
+        title: Title
+        content: Content
+  errors:
+    format: "%{attribute}%{message}"
+    messages:
+      blank: can't be blank
+  helpers:
+    submit:
+      create: create Task
+      # update: 更新する
+  common:
+    show: Show
+    edit: Edit
+    destroy: Destroy
+    back: Back
+  tasks:
+    new: New Task Page
+    index: Tasks Index Page
+    show: Show Task Page
+    edit: Edit Task Page
+    # create:
+    #   created: タスクを登録しました
+    # update:
+    #   updated: タスクを更新しました
+    # destroy:
+    #   destroyed: タスクを削除しました
