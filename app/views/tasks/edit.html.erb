@@ -3,9 +3,11 @@
   <%= f.label :title %>
   <%= f.text_field :title %>
   <%= f.label :content %>
+  <%= f.text_area :content %>
+  <%= f.label :content %>
   <%= f.text_field :content %>
         
-  <%= f.submit "更新する" %>
-  <%= link_to t('back'), tasks_path%>
+  <%= f.submit "更新する", class: "update-task"%>
+  <%= link_to t('back'), tasks_path, class: "back"%>
 
 <% end %>
