@@ -1,7 +1,7 @@
 ja:
   activerecord:
     models:
-      task: タスク
+      task: Task
     attributes:
       task:
         title: Title
@@ -12,7 +12,7 @@ ja:
       blank: can't be blank
   helpers:
     submit:
-      create: create Task
+      create: Create Task
   common:
     show: Show
     edit: Edit
