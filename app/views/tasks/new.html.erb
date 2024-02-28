@@ -5,6 +5,6 @@
   <p><%= f.text_field :title %></p>
   <%= f.label :content %>
   <p><%= f.text_area :content, size: "20x5"%></p>
-  <p><%= f.submit "create task", class: "create-task"%></p>
-<%= link_to t('戻る'), tasks_path, class: "back"%>
+  <p><%= f.submit "create task", id: "create-task"%></p>
+<%= link_to t('戻る'), tasks_path, id: "back"%>
 <% end %>

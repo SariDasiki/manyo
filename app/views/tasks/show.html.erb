@@ -4,6 +4,6 @@
 <p>created_at: <%= @task.created_at %></p>
 
 <div>
-<%= link_to t('Edit'), edit_task_path(@task), class: "edit-task"%>
-<%= link_to t('Back'), tasks_path, class: "back"%>
+<%= link_to t('Edit'), edit_task_path(@task), id: "edit-task"%>
+<%= link_to t('Back'), tasks_path, id: "back"%>
 </div>
