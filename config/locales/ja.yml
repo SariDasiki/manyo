@@ -13,11 +13,11 @@ ja:
   helpers:
     submit:
       create: create Task
-      # update: 更新する
   common:
     show: Show
     edit: Edit
     destroy: Destroy
+    confirm_destroy: Are you sure?
     back: Back
   tasks:
     new: New Task Page
