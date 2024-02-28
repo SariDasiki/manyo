@@ -7,7 +7,7 @@ ja:
         title: Title
         content: Content
   errors:
-    format: "%{attribute}%{message}"
+    format: "%{attribute} %{message}"
     messages:
       blank: can't be blank
   helpers:
