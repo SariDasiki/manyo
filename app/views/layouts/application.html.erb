@@ -14,8 +14,8 @@
     <%= content_tag(:div, value, class: "#{key}") %>
   <% end %>
   <div>
-    <%= link_to "Tasks Index", tasks_path, {class: "tasks-index"}%>
-    <%= link_to "New Task", new_task_path, {class: "new-task"}%>
+    <%= link_to "Tasks Index", tasks_path, id: "tasks-index"%>
+    <%= link_to "New Task", new_task_path, id: "new-task"%>
   </div>
   <%= yield %>
   </body>
