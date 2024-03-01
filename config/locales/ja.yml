@@ -14,6 +14,7 @@ ja:
   helpers:
     submit:
       create: 登録する
+      update: 更新する
   common:
     header-index: タスク一覧
     header-new: タスクを登録する
