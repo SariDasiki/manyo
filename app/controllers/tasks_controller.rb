@@ -6,7 +6,7 @@ class TasksController < ApplicationController
     def create
       @task = Task.new(task_params)
       if @task.save
-       flash[:notice] ='Task was successfully created.'
+       flash[:notice] ='タスクを登録しました'
        redirect_to tasks_path
       else
         render :new
@@ -14,7 +14,7 @@ class TasksController < ApplicationController
     end
 
     def index
-      @tasks = Task.all
+      @tasks = Task.order(created_at: "DESC").page(params[:page])
     end
 
     def show
@@ -28,7 +28,7 @@ class TasksController < ApplicationController
     def update
       @task = Task.find(params[:id])
       if @task.update(task_params)
-        flash[:notice] = 'Task was successfully updated.'
+        flash[:notice] = 'タスクを更新しました'
         redirect_to task_path(@task)
       else
         render :edit
@@ -38,7 +38,7 @@ class TasksController < ApplicationController
     def destroy
       @task = Task.find(params[:id])
       @task.delete
-      flash[:notice] = 'Task was successfully destroyed.'
+      flash[:notice] = 'タスクを削除しました'
       redirect_to tasks_path
     end
 
@@ -48,7 +48,7 @@ class TasksController < ApplicationController
     end
 
     def task_params
-      params.require(:task).permit(:title, :content)
+      params.require(:task).permit(:title, :content, :page)
     end
     
 end
