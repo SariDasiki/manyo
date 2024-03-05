@@ -1,10 +1,11 @@
 <h1><%= t('tasks.index') %></h1>
 <%= form_with(scope: :search, url: tasks_path, method: :get, local: true) do |f| %>
-  <%= f.label :status %>
+  <%= f.label :status, t('activerecord.attributes.task.status') %>
   <%= f.select :status, Task.statuses, { include_blank: true } %>
-  <%= f.label :title %>
+
+  <%= f.label :title, t('activerecord.attributes.task.title') %>
   <%= f.text_field :title, { prompt: '検索' } %>
-  <%= f.submit t('common.search'),id:"search_task" %>
+  <%= f.submit t('common.search'),id: "search_task" %>
 <% end %>
 
   <table>

@@ -15,7 +15,8 @@
     <%= f.label :content %>
     <%= f.text_area :content %>
     <%= f.label :deadline_on %>
-    <input name="deadline_on" type="date" />
+    <%= f.date_field :deadline_on %>
+
     <%= f.label :priority %>
     <%= f.select :priority, Task.priorities.keys.to_a, include_blank: true %>
     <%= f.label :status %>
