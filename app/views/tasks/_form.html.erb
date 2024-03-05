@@ -17,9 +17,9 @@
     <%= f.label :deadline_on %>
     <input name="deadline_on" type="date" />
     <%= f.label :priority %>
-    <%= select :priority, :name, Task.priorities.keys.to_a, include_blank: true %>
+    <%= f.select :priority, Task.priorities.keys.to_a, include_blank: true %>
     <%= f.label :status %>
-    <%= select :status, :name, Task.statuses.keys.to_a, include_blank: true %>
+    <%= f.select :status, Task.statuses.keys.to_a, include_blank: true %>
           
     <%= f.submit id: button_id %>
     <%= link_to t('common.back'), tasks_path, id: "back" %>
