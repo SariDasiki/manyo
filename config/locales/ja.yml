@@ -46,6 +46,7 @@ ja:
     edit: タスク編集ページ
   users:
     new: アカウント登録ページ
+    show: アカウント詳細ページ
     edit: アカウント編集ページ
   admins:
     index: ユーザ一覧ページ

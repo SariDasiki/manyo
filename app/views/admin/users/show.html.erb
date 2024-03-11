@@ -1,7 +1,7 @@
 <h1><%= t('admins.show') %></h1>
 <p>名前: <%= @user.name %></p>
 <p>メールアドレス: <%= @user.email %></p>
-<p>管理者権限: <%= @user.admin %></p>
+<p>管理者権限: <%= @user.admin ? "あり" : "なし" %></p>
 
 <table>
   <thead>
