@@ -30,10 +30,10 @@
    </div>
    <%if admin? %>
       <div class="field">
-        <li><%= link_to "ユーザー一覧", admin_users_path, id: "users-index" %></li>
+        <li><%= link_to "ユーザ一覧", admin_users_path, id: "users-index" %></li>
       </div>
       <div class="field">
-        <li><%= link_to "ユーザーを登録する", new_admin_user_path, id: "add-user" %></li>
+        <li><%= link_to "ユーザを登録する", new_admin_user_path, id: "add-user" %></li>
       </div>
    <% end %>
     <% else %>

@@ -7,7 +7,7 @@ class Admin::UsersController < ApplicationController
   end
 
   def index
-    @users = User.all
+    @users = User.eager_load(:tasks)
   end
 
   def create

@@ -22,6 +22,7 @@ ja:
     format: "%{attribute}%{message}"
     messages:
       blank: を入力してください
+      take: はすでに使用されています
       too_short: は6文字以上で入力してください
       confirmation: とパスワードの入力が一致しません
   helpers:
