@@ -1,0 +1,4 @@
+<h1><%= t('users.edit') %></h1>
+
+<%= render 'form', user: @user, button_id: "update-user" %>
+<%= link_to t('common.back'), user_path(current_user.id), id: "edit-user" %>

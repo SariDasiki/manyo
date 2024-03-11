@@ -2,6 +2,7 @@ ja:
   activerecord:
     models:
       task: タスク
+      user: ユーザ
     attributes:
       task:
         title: タイトル
@@ -10,10 +11,19 @@ ja:
         deadline_on: 終了期限
         priority: 優先度
         status: ステータス
+      user:
+        name: 名前
+        email: メールアドレス
+        admin: 管理者権限
+        minute: タスク数
+        password: パスワード
+        password_confirm: パスワード(確認)
   errors:
     format: "%{attribute}%{message}"
     messages:
       blank: を入力してください
+      too_short: は6文字以上で入力してください
+      confirmation: とパスワードの入力が一致しません
   helpers:
     submit:
       create: 登録する
@@ -33,3 +43,11 @@ ja:
     index: タスク一覧ページ
     show: タスク詳細ページ
     edit: タスク編集ページ
+  users:
+    new: アカウント登録ページ
+    edit: アカウント編集ページ
+  admins:
+    index: ユーザー一覧ページ
+    new: ユーザー登録ページ
+    show: ユーザー詳細ページ
+    edit: ユーザー編集ページ

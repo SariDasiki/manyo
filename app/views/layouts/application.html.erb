@@ -13,10 +13,34 @@
   <% flash.each do |key, value| %>
     <%= content_tag(:div, value, class: "#{key}") %>
   <% end %>
-  <div>
-    <%= link_to t('common.header-index'), tasks_path, id: "tasks-index"%>
-    <%= link_to t('common.header-new'), new_task_path, id: "new-task"%>
-  </div>
+
+  <!-- ヘッダーのリンクの出しわけしている箇所 -->
+  <%if logged_in? %>
+   <div class="field">
+     <li><%= link_to t('common.header-index'), tasks_path, id: "tasks-index"%></li>
+   </div>
+   <div class="field">
+     <li><%= link_to t('common.header-new'), new_task_path, id: "new-task"%></li>
+   </div>
+   <div class="field">
+     <li><%= link_to "アカウント設定", user_path(current_user.id), id: "account-setting" %></li>
+   </div>
+   <div class="field">
+    <li><%= link_to "ログアウト", session_path(current_user.id), method: :delete, id: "sign-out" %></li>
+   </div>
+   <%if admin? %>
+      <div class="field">
+        <li><%= link_to "ユーザー一覧", admin_users_path, id: "users-index" %></li>
+      </div>
+      <div class="field">
+        <li><%= link_to "ユーザーを登録する", new_admin_user_path, id: "add-user" %></li>
+      </div>
+   <% end %>
+    <% else %>
+    <%= link_to "アカウント登録", new_user_path, id: "sign-up" %>
+    <%= link_to "ログイン", new_session_path, id: "sign-in" %>
+  <% end %>
   <%= yield %>
   </body>
+
 </html>

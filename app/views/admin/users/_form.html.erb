@@ -1,0 +1,41 @@
+<%= form_with(model: [:admin, @user], local: true) do |form| %>
+  <% if @user && @user.errors.any? %>
+      <div id="error_explanation">
+        <ul>
+          <% @user.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+      
+  <div class="field">
+      <%= form.label :name %>
+      <%= form.text_field :name %>
+    </div>
+  <br>
+    <div class="field">
+      <%= form.label :email %>
+      <%= form.text_area :email %>
+    </div>
+    <br>
+    <div class="field">
+      <%= form.label :password %>
+      <%= form.text_field :password %>
+    </div>
+    <br>
+    <div class="field">
+      <%= form.label :password_confirm %>
+      <%= form.text_area :password_confirm %>
+    </div>
+
+    <div class="field">
+      <%= form.label :管理者権限 %> 
+     <%= form.check_box :admin %>
+    </div>
+  
+    <div class="actions">
+      <%= form.submit %>
+    </div>
+  <% end %>
+  
