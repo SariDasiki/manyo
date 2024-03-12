@@ -13,7 +13,7 @@ class Admin::UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      flash[:notice] ='ユーザーを登録しました'
+      flash[:notice] ='ユーザを登録しました'
       redirect_to admin_users_path
     else
       render :new
@@ -42,7 +42,7 @@ class Admin::UsersController < ApplicationController
   def destroy
     @user = User.find(params[:id])
     if @user.destroy
-      flash[:notice] = 'ユーザーを削除しました'
+      flash[:notice] = 'ユーザを削除しました'
       redirect_to admin_users_path
     else
       @users = User.all

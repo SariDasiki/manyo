@@ -19,7 +19,7 @@ class TasksController < ApplicationController
   end
 
   def index
-    @tasks = Task.all
+    @tasks = current_user.tasks
     
     if params[:search].present?
       if params[:search][:title].present? && params[:search][:status].present?

@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :log_in_check, only: [:show]
+  before_action :log_in_check, only: [:show, :edit, :update, :destroy]
   before_action :log_out_check, only: [:new]
   
   def new
@@ -42,7 +42,7 @@ class UsersController < ApplicationController
   def destroy
     @user = User.find(params[:id])
     @user.delete
-    flash[:notice] = 'ユーザーを削除しました'
+    flash[:notice] = 'ユーザを削除しました'
     redirect_to users_path
   end
 

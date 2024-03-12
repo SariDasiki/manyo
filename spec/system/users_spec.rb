@@ -49,7 +49,7 @@ require 'rails_helper'
 #            click_link("アカウント設定")
 #            expect(page).to have_content("アカウント詳細ページ") 
 #          end
-#          it '他人のユーザー詳細画面にアクセスすると、タスク一覧画面に遷移する'do
+#          it '他人のユーザ詳細画面にアクセスすると、タスク一覧画面に遷移する'do
 #           visit user_path(fourth_user)
 #           expect(current_path).to eq tasks_path
 #          end
@@ -74,12 +74,12 @@ require 'rails_helper'
 #     end
 
 #     it 'ユーザ一覧画面にアクセスできる'do
-#       click_link("ユーザー一覧")
+#       click_link("ユーザ一覧")
 #       expect(current_path).to eq admin_users_path
 #     end
 
 #     it '管理者を登録できる'do
-#       click_link("ユーザーを登録する")
+#       click_link("ユーザを登録する")
 
 #       fill_in 'user[name]', with: "user"
 #       fill_in 'user[email]', with: "user@gmail.com"
@@ -100,7 +100,7 @@ require 'rails_helper'
 #     end
 
 #     it 'ユーザ編集画面から、自分以外のユーザを編集できる'do
-#       click_link("ユーザー一覧")
+#       click_link("ユーザ一覧")
 #       first('tr td:nth-child(5)').click
 #       fill_in 'user[name]', with: "user"
 #       fill_in 'user[password]', with: user.password
@@ -111,12 +111,12 @@ require 'rails_helper'
 #     end
 
 #     it 'ユーザを削除できる'do
-#       click_link("ユーザー一覧")
+#       click_link("ユーザ一覧")
 #       accept_confirm do
 #         page.all("a.destroy-user")[1].click
 #       end
 
-#       expect(page).to have_content "ユーザーを削除しました" 
+#       expect(page).to have_content "ユーザを削除しました" 
 #       expect(current_path).to eq admin_users_path 
 #     end
 #   end
