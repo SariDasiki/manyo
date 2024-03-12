@@ -15,20 +15,40 @@
 
 #   )
 # end
-50.times do |n|
-User.create!(
+
+admin_user = User.create!(
   name: "ccc",
   email: "cccc@gmail.com",
   password: "cccc@gmail.com",
   admin: true
 )
-end
 
 50.times do |n|
-  User.create!(
+  Task.create!(
+    title: '書類作成',
+    content: '企画書を作成する。',
+    deadline_on: Date.today + n.day,
+    status: Task.statuses.keys.sample,
+    priority: Task.priorities.keys.sample,
+    user: admin_user
+  )
+end
+
+  user = User.create!(
     name: "false",
     email: "false@gmail.com",
     password: "false@gmail.com",
     admin: false
   )
-end
+
+  50.times do |n|
+    Task.create!(
+      title: '書類作成',
+      content: '企画書を作成する。',
+      deadline_on: Date.today + n.day,
+      status: Task.statuses.keys.sample,
+      priority: Task.priorities.keys.sample,
+      user: user
+  
+    )
+  end
