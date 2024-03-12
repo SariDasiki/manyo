@@ -15,7 +15,7 @@
   
     <div class="field">
       <%= form.label :email %>
-      <%= form.text_area :email %>
+      <%= form.text_field :email %>
     </div>
 
     <div class="field">
@@ -24,11 +24,13 @@
     </div>
   
     <div class="field">
-      <%= form.label :password_confirm %>
+      <%= form.label :password_confirmation %>
       <%= form.text_field :password_confirmation %>
     </div>
 
     <div class="actions">
       <%= form.submit id: button_id %>
     </div>
+    <%= link_to t('common.back'), tasks_path, id: "back" %>
+    
   <% end %>

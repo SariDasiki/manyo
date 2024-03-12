@@ -13,7 +13,7 @@ class Admin::UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      flash[:notice] ='アカウントを登録しました'
+      flash[:notice] ='ユーザーを登録しました'
       redirect_to admin_users_path
     else
       render :new
@@ -23,7 +23,6 @@ class Admin::UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @tasks = @user.tasks
-    # @tasks = @user.eager_load(:task)
   end
 
   def edit

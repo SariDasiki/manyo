@@ -1,5 +1,4 @@
 class SessionsController < ApplicationController
-    # before_action :correct_user, only: [:show, :edit]
     before_action :log_out_check, only: [:new]
 
     def new
@@ -34,7 +33,7 @@ class SessionsController < ApplicationController
         @user= User.find(params[:id])
         redirect_to current_user unless current_user?(@user)
       end
-      
+
       def log_out_check
         if logged_in?
           flash[:notice] = 'ログアウトしてください'

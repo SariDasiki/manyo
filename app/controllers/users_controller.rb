@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-  # before_action :correct_user, only: [:show, :edit]
   before_action :log_in_check, only: [:show]
   before_action :log_out_check, only: [:new]
   
