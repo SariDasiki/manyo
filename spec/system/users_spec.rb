@@ -114,7 +114,6 @@ RSpec.describe 'ユーザ管理機能', type: :system do
       accept_confirm do
         page.all("a.destroy-user")[0].click
       end
-
       expect(page).to have_content "ユーザを削除しました" 
       expect(current_path).to eq admin_users_path 
     end
