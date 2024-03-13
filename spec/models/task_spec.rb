@@ -1,14 +1,15 @@
 require 'rails_helper'
 
 RSpec.describe Task, type: :model do
-
+  let!(:second_user) { FactoryBot.create(:second_user) }
   describe 'scope title_like(title)'do
     context 'scopeメソッドでタイトルのあいまい検索をした場合'do
+
       before do
         # 事前データ準備
-        FactoryBot.create(:task)
-        FactoryBot.create(:second_task)
-        FactoryBot.create(:third_task)
+        FactoryBot.create(:task, user: second_user)
+        FactoryBot.create(:second_task, user: second_user)
+        FactoryBot.create(:third_task, user: second_user)
       end
       
       it "検索ワードを含むタスクが絞り込まれる"do
@@ -26,9 +27,9 @@ RSpec.describe Task, type: :model do
     context 'scopeメソッドでステータスで検索をした場合'do
       before do
         # 事前データ準備
-        FactoryBot.create(:task)
-        FactoryBot.create(:second_task)
-        FactoryBot.create(:third_task)
+        FactoryBot.create(:task, user: second_user)
+        FactoryBot.create(:second_task, user: second_user)
+        FactoryBot.create(:third_task, user: second_user)
       end
       
       it "指定のステータス含むタスクが絞り込まれる"do
@@ -46,9 +47,9 @@ RSpec.describe Task, type: :model do
     context 'scopeメソッドでステータスで検索をした場合'do
       before do
         # 事前データ準備
-        FactoryBot.create(:task)
-        FactoryBot.create(:second_task)
-        FactoryBot.create(:third_task)
+        FactoryBot.create(:task, user: second_user)
+        FactoryBot.create(:second_task, user: second_user)
+        FactoryBot.create(:third_task, user: second_user)
       end
       
       it "終了期限の昇順でソートされる"do
@@ -66,9 +67,9 @@ RSpec.describe Task, type: :model do
     context 'scopeメソッドで優先度並び替えた場合'do
       before do
         # 事前データ準備
-        FactoryBot.create(:task)
-        FactoryBot.create(:second_task)
-        FactoryBot.create(:third_task)
+        FactoryBot.create(:task, user: second_user)
+        FactoryBot.create(:second_task, user: second_user)
+        FactoryBot.create(:third_task, user: second_user)
       end
       
       it "優先度の降順でソートされる"do
@@ -105,7 +106,7 @@ RSpec.describe Task, type: :model do
 
     context 'タスクのタイトルと説明に値が入っている場合' do
       let(:task) {
-        FactoryBot.build(:task)
+        FactoryBot.build(:task, user: second_user)
       }
 
       it 'タスクを登録できる'do

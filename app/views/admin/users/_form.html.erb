@@ -1,0 +1,42 @@
+<%= form_with(model: [:admin, @user], local: true) do |form| %>
+  <% if @user && @user.errors.any? %>
+      <div id="error_explanation">
+        <ul>
+          <% @user.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+      
+  <div class="field">
+      <%= form.label :name %>
+      <%= form.text_field :name %>
+    </div>
+  <br>
+    <div class="field">
+      <%= form.label :email %>
+      <%= form.text_field :email %>
+    </div>
+    <br>
+    <div class="field">
+      <%= form.label :password %>
+      <%= form.password_field :password %>
+    </div>yes
+    <br>
+    <div class="field">
+      <%= form.label :password_confirmation %>
+      <%= form.password_field :password_confirmation %>
+    </div>
+
+    <div class="field">
+      <%= form.label :管理者権限 %> 
+     <%= form.check_box :admin %>
+    </div>
+  
+    <div class="actions">
+      <%= form.submit id: button_id %>
+      <%= link_to t('common.back'), admin_users_path, id: "back" %>
+    </div>
+  <% end %>
+  
