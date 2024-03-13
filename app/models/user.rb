@@ -5,6 +5,8 @@ class User < ApplicationRecord
     before_update :admin_cannot_update
     before_destroy :admin_cannot_delete
     
+    before_validation { email.downcase! }
+    
     validates :name, presence: true
     validates :email, presence: true
     validates :email, uniqueness: true 
