@@ -22,13 +22,15 @@ class TasksController < ApplicationController
     @tasks = current_user.tasks
     
     if params[:search].present?
-      if params[:search][:title].present? && params[:search][:status].present?
-        @tasks = @tasks.title_like(params[:search][:title]).status_search(params[:search][:status])
+      if params[:search][:title].present? && params[:search][:status].present? && params[:search][:label].present?
+        @tasks = @tasks.title_like(params[:search][:title]).status_search(params[:search][:status]).label_tag(params[:search][:label])
         # @tasks = titleのあいまい検索のscopeとstatus_searchを.で繋げて使う notion 万葉課題3 ヒント1
       elsif params[:search][:title].present?
         @tasks = @tasks.title_like(params[:search][:title])
       elsif params[:search][:status].present?
         @tasks = @tasks.status_search(params[:search][:status])
+      elsif params[:search][:label].present?
+        @tasks = @tasks.label_tag(params[:search][:label])
       end
     end
 
@@ -45,6 +47,7 @@ class TasksController < ApplicationController
 
   def show
     @task = Task.find(params[:id])
+  
 
     unless current_user?(@task.user)
       flash[:notice] = 'アクセス権限がありません'
@@ -85,7 +88,7 @@ class TasksController < ApplicationController
     end
 
     def task_params
-      params.require(:task).permit(:title, :content, :page, :status, :priority, :deadline_on)
+      params.require(:task).permit(:title, :content, :page, :status, :priority, :deadline_on, {label_ids: []})
     end
 
     def log_in_check

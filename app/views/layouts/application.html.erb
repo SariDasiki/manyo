@@ -7,7 +7,8 @@
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    </head>
 
   <body>
   <% flash.each do |key, value| %>
@@ -15,32 +16,41 @@
   <% end %>
 
   <!-- ヘッダーのリンクの出しわけしている箇所 -->
-  <%if logged_in? %>
-   <div class="field">
-     <li><%= link_to t('common.header-index'), tasks_path, id: "tasks-index"%></li>
-   </div>
-   <div class="field">
-     <li><%= link_to t('common.header-new'), new_task_path, id: "new-task"%></li>
-   </div>
-   <div class="field">
-     <li><%= link_to "アカウント設定", user_path(current_user.id), id: "account-setting" %></li>
-   </div>
-   <div class="field">
-    <li><%= link_to "ログアウト", session_path(current_user.id), method: :delete, id: "sign-out" %></li>
-   </div>
-   <%if admin? %>
-      <div class="field">
-        <li><%= link_to "ユーザ一覧", admin_users_path, id: "users-index" %></li>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">TaskApp</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <% if logged_in? %>
+          <%= link_to t('common.header-index'), tasks_path, class: "nav-item nav-link active", id: "tasks-index" %> <span class="sr-only">(current)</span> 
+          <%= link_to t('common.header-new'), new_task_path, class: "nav-item nav-link active", id: "new-task" %> <span class="sr-only">(current)</span> 
+          <%= link_to t('common.label-index'), labels_path, class: "nav-item nav-link active", id: "labels-index" %> <span class="sr-only">(current)</span> 
+          <%= link_to t('common.label-new'), new_label_path, id: "new-label", class: "nav-item nav-link active" %> <span class="sr-only">(current)</span> 
+          <%= link_to t('common.account'), user_path(current_user.id), id: "account-setting", class: "nav-item nav-link active"%> <span class="sr-only">(current)</span> 
+          <%= link_to t('common.logout'), session_path(current_user.id), method: :delete, id: "sign-out", class: "nav-item nav-link active" %> <span class="sr-only">(current)</span>
+
+          <% if admin? %>
+            <%= link_to t('common.user-index'), admin_users_path, class: "nav-item nav-link active", id: "users-index" %>
+            <%= link_to t('common.user-new'), new_admin_user_path, class: "nav-item nav-link active",id: "add-user" %>
+          <% end %>
+        <% else %>
+          <%= link_to "アカウント登録", new_user_path, id: "sign-up" %>
+          <%= link_to "ログイン", new_session_path, id: "sign-in" %>
+        <% end %>
       </div>
-      <div class="field">
-        <li><%= link_to "ユーザを登録する", new_admin_user_path, id: "add-user" %></li>
-      </div>
-   <% end %>
-    <% else %>
-    <%= link_to "アカウント登録", new_user_path, id: "sign-up" %>
-    <%= link_to "ログイン", new_session_path, id: "sign-in" %>
-  <% end %>
-  <%= yield %>
+    </div>
+  </nav>
+
+  
+    <div class='container'>
+      <%= yield %>
+    </div>
+   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
   </body>
 
 </html>

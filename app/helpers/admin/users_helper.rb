@@ -6,7 +6,7 @@ module Admin::UsersHelper
   end
 
   # logged_in?が実行されたら、current_userメソッドを実行
-  # メソッド？が実行されたら、データがあったらtrue or 
+  # メソッド？が実行されたら、データがあったらtrue 
   # データなかったらfalseを返している
   def logged_in?
     current_user.present?

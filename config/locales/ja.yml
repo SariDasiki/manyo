@@ -3,6 +3,7 @@ ja:
     models:
       task: タスク
       user: ユーザ
+      label: ラベル
     attributes:
       task:
         title: タイトル
@@ -11,6 +12,7 @@ ja:
         deadline_on: 終了期限
         priority: 優先度
         status: ステータス
+        label: ラベル
       user:
         name: 名前
         email: メールアドレス
@@ -18,6 +20,10 @@ ja:
         minute: タスク数
         password: パスワード
         password_confirmation: パスワード（確認）
+      label:
+        name: 名前
+        name-label: ラベル
+        minute: タスク数
   errors:
     format: "%{attribute}%{message}"
     messages:
@@ -32,6 +38,12 @@ ja:
   common:
     header-index: タスク一覧
     header-new: タスクを登録する
+    label-index: ラベル一覧
+    label-new: ラベルを登録する
+    account: アカウント設定
+    logout: ログアウト
+    user-index: ユーザ一覧
+    user-new: ユーザを登録する
     show: 詳細
     edit: 編集
     destroy: 削除
@@ -53,3 +65,7 @@ ja:
     new: ユーザ登録ページ
     show: ユーザ詳細ページ
     edit: ユーザ編集ページ
+  labels:
+    index: ラベル一覧ページ
+    new: ラベル登録ページ
+    edit: ラベル編集ページ

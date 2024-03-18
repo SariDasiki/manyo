@@ -8,19 +8,49 @@
         </ul>
       </div>
     <% end %>
-    <%= f.label :title %>
-    <%= f.text_field :title %>
-    <%= f.label :content %>
-    <%= f.text_area :content %>
-    <%= f.label :deadline_on %>
-    <%= f.date_field :deadline_on %>
+    <div class="col">
+      <%= f.label :title, t('activerecord.attributes.task.title') %>
+      <%= f.text_field :title, class: "form-control" %>
+    </div>
+    
+    <div class="col">
+      <%= f.label :content, t('activerecord.attributes.task.content') %>
+      <%= f.text_area :content, class: "form-control" %>
+    </div>
 
-    <%= f.label :priority %>
-    <%= f.select :priority, Task.priorities.keys.to_a, include_blank: true %>
-    <%= f.label :status %>
-    <%= f.select :status, Task.statuses.keys.to_a, include_blank: true %>
-          
-    <%= f.submit id: button_id %>
-    <%= link_to t('common.back'), tasks_path, id: "back" %>
+    
+    <div class="col">
+      <%= f.label :deadline_on, t('activerecord.attributes.task.deadline_on') %>
+      <%= f.date_field :deadline_on, class: "form-control" %>
+    </div>
+   
+
+  <div class="col">
+    <%= f.label :status, t('activerecord.attributes.task.status') %>
+    <%= f.select :status, Task.statuses.keys.to_a, { include_blank: true }, class: "form-control" %>
+  </div>
+
+  <div class="col">
+    <%= f.label :priority, t('activerecord.attributes.task.priority') %>
+    <%= f.select :priority, Task.priorities.keys.to_a, { include_blank: true }, class: "form-control" %>
+  </div>
+
+  <div class="col">
+    <%= f.label :label, t('activerecord.attributes.label.') %>
+    <% current_user.labels.each do |label| %>
+      <%= f.check_box :label_ids, { multiple: true, include_hidden: false }, label[:id] %>
+      <%= label.name %>
+    <% end %>
+  </div>
+
+    
+
   
+   <div class="field">
+      <%= f.submit id: button_id %>
+   </div>
+      <%= link_to t('common.back'), tasks_path, id: "back" %>
+   
+      
+
   <% end %>

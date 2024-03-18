@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   root 'tasks#index'
   resources :tasks, only: [:new, :index, :create, :show, :edit, :update, :destroy]
   resources :users, only: [:new, :index, :create, :show, :edit, :update, :destroy]
+  resources :labels, only: [:new, :index, :create, :edit, :update, :destroy]
   namespace :admin do
     resources :users, only: [:new, :index, :create, :show, :edit, :update, :destroy]
   end

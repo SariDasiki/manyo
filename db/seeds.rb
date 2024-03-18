@@ -16,12 +16,12 @@
 #   )
 # end
 
-admin_user = User.create!(
-  name: "ccc",
-  email: "cccc@gmail.com",
-  password: "cccc@gmail.com",
-  admin: true
-)
+# admin_user = User.create!(
+#   name: "ccc",
+#   email: "cccc@gmail.com",
+#   password: "cccc@gmail.com",
+#   admin: true
+# )
 
 50.times do |n|
   Task.create!(
@@ -30,16 +30,24 @@ admin_user = User.create!(
     deadline_on: Date.today + n.day,
     status: Task.statuses.keys.sample,
     priority: Task.priorities.keys.sample,
-    user: admin_user
+    label_name: Label.label_ids.keys.sample,
   )
 end
-
+  label = Label.create!(
+    name: "label_1"
+  )
+  label = Label.create!(
+    name: "label_2"
+  )
+  
+  10.times do |n|
   user = User.create!(
     name: "false",
     email: "false@gmail.com",
     password: "false@gmail.com",
-    admin: false
+    # admin: false
   )
+  end
 
   50.times do |n|
     Task.create!(
@@ -48,7 +56,7 @@ end
       deadline_on: Date.today + n.day,
       status: Task.statuses.keys.sample,
       priority: Task.priorities.keys.sample,
+      user_id: Label.user_ids.keys.sample,
       user: user
-  
     )
   end

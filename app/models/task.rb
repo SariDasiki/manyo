@@ -1,5 +1,9 @@
 class Task < ApplicationRecord
   belongs_to :user
+  
+  has_many :task_labels
+  has_many :labels, through: :task_labels
+
   validates :title, presence:true
   validates :content, presence: true
   validates :deadline_on, presence: true
@@ -27,4 +31,7 @@ class Task < ApplicationRecord
     priority ? order(priority: :desc) : self # 呼び出し元のデータを返す
   }
 
+  scope :label_tag, -> (label) { joins(:labels).where(labels: {id: label}) }
+  # タスクテーブルにラベルテーブルのデータをくっつけてから、検索機能を作っている
+# PGには検索用のみが必要で、ユーザーには名前:表示用がいるから、id:検索用で分けて調べた
 end
