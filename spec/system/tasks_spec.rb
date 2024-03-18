@@ -1,108 +1,112 @@
 require 'rails_helper'
 
-describe '検索機能'do
-   context 'ラベルで検索をした場合'do
-     let!(:second_user) { 
-      FactoryBot.create(:second_user)
-      }
-      let!(:label) {
-      FactoryBot.build(:label, id: "", name: "", user_id: "")
-      }
-     before do
-       visit new_session_path
-       fill_in 'session[email]', with: "ffff@gmail.com"
-       fill_in 'session[password]', with: "ffff@gmail.com"
-       click_button("ログイン")
-     end
-    it "そのラベルの付いたタスクがすべて表示される"do
-      fill_in 'search[label_name]', with: label.name
-      click_button("検索する")
-      expect(page).to have_content(label.label_name)
+RSpec.describe "タスク管理機能", type: :system do
+  let!(:user) {
+    FactoryBot.create(:user)
+  }
+
+  let!(:first_task) { FactoryBot.create(:task, title: 'first_task_title', user: user)}
+  let!(:second_task) { FactoryBot.create(:second_task, title: "second_task_title", user: user) }
+  let!(:third_task) { FactoryBot.create(:third_task, title: "third_task_title", user: user) }
+
+  describe '一覧表示機能'do
+    before do
+      visit new_session_path
+      fill_in 'session[email]', with: user.email
+      fill_in 'session[password]', with: user.password
+      click_button("ログイン")
+      visit tasks_path
     end
-   end
-end
 
-# RSpec.describe "タスク管理機能", type: :system do
-#   describe '一覧表示機能'do
-#     describe 'ソート機能'do
-#       let!(:first_task) { FactoryBot.create(:task, title: 'first_task_title') }
-#       let!(:second_task) { FactoryBot.create(:second_task, title: "second_task_title") }
-#       let!(:third_task) { FactoryBot.create(:third_task, title: "third_task_title") }
+    describe 'ソート機能'do
 
-#       context '「終了期限」というリンクをクリックした場合'do
-#         before do
-#           visit tasks_path
-#         end
+      context '「終了期限」というリンクをクリックした場合'do
      
-#         it "終了期限昇順に並び替えられたタスク一覧が表示される"do
-#           click_link("終了期限")
-#           sleep 0.1
-#           task_list = all('body tr')
-#           # 複数のテストデータの並び順を確認する
-#           expect(task_list[1].text).to have_content(third_task.title)
-#         end
-#       end
+        it "終了期限昇順に並び替えられたタスク一覧が表示される"do
+          click_link("終了期限")
+          sleep 0.1
+          task_list = all('tbody tr')
+          # 複数のテストデータの並び順を確認する
+          expect(task_list[0].text).to have_content(third_task.title)
+        end
+      end
 
-#       context '「優先度」というリンクをクリックした場合'do
-#         before do
-#           visit tasks_path
-#         end
+      context '「優先度」というリンクをクリックした場合'do
       
-#         it "優先度の高い順に並び替えられたタスク一覧が表示される" do
-#           click_link("優先度")
-#           task_list = all('body tr')
-#           # 複数のテストデータの並び順を確認する
-#           expect(task_list[1].text).to have_content(first_task.title)
-#         end
-#       end
-#     end
+        it "優先度の高い順に並び替えられたタスク一覧が表示される" do
+          click_link("優先度")
+          task_list = all('body tr')
+          # 複数のテストデータの並び順を確認する
+          expect(task_list[1].text).to have_content(first_task.title)
+        end
+      end
+    end
 
-#     describe '検索機能'do
-#       let!(:first_task) { FactoryBot.create(:task, title: 'first_task_title') }
-#       let!(:second_task) { FactoryBot.create(:second_task, title: "second_task_title") }
-#       let!(:third_task) { FactoryBot.create(:third_task, title: "third_task_title") }
+    describe '検索機能'do
+      context 'タイトルであいまい検索をした場合'do
+        
+        it "検索ワードを含むタスクのみ表示される"do
+          fill_in 'search[title]', with: 'first'
+          click_button("検索する")
+          expect(page).to have_content(first_task.title)
+        end
+      end
 
-#       context 'タイトルであいまい検索をした場合'do
-#         before do
-#           visit tasks_path
-#         end
+      context 'ステータスで検索した場合'do
 
-#         it "検索ワードを含むタスクのみ表示される"do
-#           fill_in 'search[title]', with: 'first'
-#           click_button("検索する")
-#           expect(page).to have_content(first_task.title)
-#         end
-#       end
+        it "検索したステータスに一致するタスクのみ表示される" do
+          select "完了"
+          click_button("検索する")
 
-#       context 'ステータスで検索した場合'do
-#         before do
-#           visit tasks_path
-#         end
-#         it "検索したステータスに一致するタスクのみ表示される" do
-#           select "完了"
-#           click_button("検索する")
+          expect(page).to have_content(third_task.title)
+        end
+      end
 
-#           expect(page).to have_content(third_task.title)
-#         end
-#       end
+      context 'タイトルとステータスで検索した場合'do
 
-#       context 'タイトルとステータスで検索した場合'do
-#         before do
-#           visit tasks_path
-#         end  
+        it "検索ワードをタイトルに含み、かつステータスに一致するタスクのみ表示される" do
+          fill_in 'search[title]', with: 'first'
+          select "未着手"
+          click_button("検索する")
+          expect(page).to have_content(first_task.title)
+        end
 
-#         it "検索ワードをタイトルに含み、かつステータスに一致するタスクのみ表示される" do
-#           fill_in 'search[title]', with: 'first'
-#           select "未着手"
-#           click_button("検索する")
-#           expect(page).to have_content(first_task.title)
-#         end
+      end
 
-#       end
-#     end
-#   end
+    end
 
-# end
+  end
+
+  describe '検索機能' do
+    context 'ラベルで検索をした場合' do
+      let!(:label) {
+        FactoryBot.create(:label, user: user)
+      }
+
+      before do
+        # ラベルからタスクのデータをとってきたい、
+        # そのためにはbefore doで
+        # ラベルからタスクのデータを取るのに中間テーブルの
+        # データを作る(Task Label .create)ことになる
+        TaskLabel.create(task:first_task,label:label)
+        visit new_session_path
+        fill_in 'session[email]', with: user.email
+        fill_in 'session[password]', with: user.password
+        click_button("ログイン")
+        visit tasks_path
+      end
+    
+      it "そのラベルの付いたタスクがすべて表示される" do
+        select label.name, from: 'search[label]'
+        click_button("検索する")
+        expect(page).to have_content(first_task.title)
+      end
+
+    end
+
+  end
+
+end
 
 #   describe '一覧表示機能' do
 #     context '一覧画面に遷移した場合' do
@@ -148,7 +152,3 @@ end
 #         expect(task_list[1].text).to have_content("test_ok")  
 #       end
 #     end
-
-#   end
-
-  
