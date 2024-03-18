@@ -70,11 +70,8 @@ RSpec.describe "タスク管理機能", type: :system do
           click_button("検索する")
           expect(page).to have_content(first_task.title)
         end
-
       end
-
     end
-
   end
 
   describe '検索機能' do

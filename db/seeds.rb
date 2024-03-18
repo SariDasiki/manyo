@@ -16,12 +16,12 @@
 #   )
 # end
 
-# admin_user = User.create!(
-#   name: "ccc",
-#   email: "cccc@gmail.com",
-#   password: "cccc@gmail.com",
-#   admin: true
-# )
+admin_user = User.create!(
+  name: "ccc",
+  email: "cccc@gmail.com",
+  password: "cccc@gmail.com",
+  admin: true
+)
 
 50.times do |n|
   Task.create!(

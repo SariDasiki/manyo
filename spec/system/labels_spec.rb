@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'ラベル管理機能', type: :systemdo
+RSpec.describe 'ラベル管理機能', type: :system do
   describe '登録機能'do
     context 'ラベルを登録した場合'do
       let!(:user) {
@@ -44,6 +44,7 @@ RSpec.describe 'ラベル管理機能', type: :systemdo
       end
      end
    end
+  end
 
 
 
